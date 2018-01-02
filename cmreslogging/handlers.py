@@ -191,14 +191,8 @@ class CMRESHandler(logging.Handler):
         self.es_doc_type = es_doc_type
         self.es_additional_fields = es_additional_fields.copy()
 
-        try:
-            self.es_additional_fields.update({'host': socket.gethostname()})
-        except Exception:
-            self.es_additional_fields.update({'host': 'localhost'})
-        try:
-            self.es_additional_fields.update({'host_ip': socket.gethostbyname(socket.gethostname())})
-        except Exception:
-            self.es_additional_fields.update({'host_ip': '127.0.0.1'})
+        self.es_additional_fields.update({'host': 'localhost'})
+        self.es_additional_fields.update({'host_ip': '127.0.0.1'})
 
         self.raise_on_indexing_exceptions = raise_on_indexing_exceptions
         self.default_timestamp_field_name = default_timestamp_field_name
